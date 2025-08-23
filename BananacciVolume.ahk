@@ -236,8 +236,18 @@ DestroyVolumeGUI()
 }
 
 ; ========================================
-; STARTUP MESSAGE
+; INITIALIZATION
 ; ========================================
 
-; Show a welcome message when the script starts
-MsgBox("🍌 Bananacci Volume Loaded! 🍌`n`nUse your volume keys to control volume with banana emojis!`n`nFeatures:`n• 10-step volume control`n• Smooth volume fading`n• Visual banana feedback`n• Auto-unmute functionality", "Bananacci Volume", "T64")
+; Show current volume as bananas on startup
+ShowCurrentVolumeOnStartup()
+
+; Function to show current volume as bananas when script starts
+ShowCurrentVolumeOnStartup()
+{
+    ; Get current system volume
+    currentVolume := SoundGetVolume()
+    
+    ; Show the volume indicator with current volume
+    ShowVolumeIndicator(currentVolume)
+}
