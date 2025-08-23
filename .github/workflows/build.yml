@@ -1,104 +1,73 @@
-name: Build and Release Bananacci Volume
+name: Build & Release (Bananacci)
 
 on:
   push:
-    tags:
-      - 'v*'
-  workflow_dispatch:
+    branches: [ main ]
+    tags: [ 'v*.*.*' ]   # create a GitHub Release on version tags
+  pull_request:
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: windows-latest
-    
+    env:
+      APP_NAME: BananacciVolume
+      SRC: BananacciVolume.ahk
+      OUT_DIR: dist
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup AutoHotkey
-      run: |
-        # Download AutoHotkey v2
-        $url = "https://github.com/AutoHotkey/AutoHotkey/releases/download/v2.0.10/AutoHotkey_2.0.10_setup.exe"
-        $output = "AutoHotkey_Setup.exe"
-        Invoke-WebRequest -Uri $url -OutFile $output
-        
-        # Install AutoHotkey silently
-        Start-Process -FilePath $output -ArgumentList "/S" -Wait
-        
-        # Add AutoHotkey to PATH
-        $env:PATH += ";C:\Program Files\AutoHotkey"
-        
-    - name: Validate AutoHotkey script
-      run: |
-        # Test if the script compiles without errors
-        $result = & "C:\Program Files\AutoHotkey\AutoHotkey.exe" /validate BananacciVolume.ahk
-        if ($LASTEXITCODE -ne 0) {
-          Write-Error "AutoHotkey script validation failed"
-          exit 1
-        }
-        Write-Host "✅ AutoHotkey script validation passed"
-        
-    - name: Create release package
-      run: |
-        # Create release directory
-        New-Item -ItemType Directory -Path "release" -Force
-        
-        # Copy files to release directory
-        Copy-Item "BananacciVolume.ahk" -Destination "release/"
-        Copy-Item "README.md" -Destination "release/"
-        
-        # Create a simple installer script
-        $installerContent = @"
-@echo off
-echo Installing Bananacci Volume...
-echo.
-echo This will copy BananacciVolume.ahk to your AutoHotkey scripts folder.
-echo.
-pause
-copy "BananacciVolume.ahk" "%USERPROFILE%\Documents\AutoHotkey\"
-echo.
-echo Installation complete! You can now run BananacciVolume.ahk
-echo.
-pause
-"@
-        $installerContent | Out-File -FilePath "release\install.bat" -Encoding ASCII
-        
-        # Create ZIP file
-        Compress-Archive -Path "release\*" -DestinationPath "BananacciVolume-v${{ github.ref_name }}.zip" -Force
-        
-    - name: Upload release artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: bananacci-volume-release
-        path: |
-          BananacciVolume-v${{ github.ref_name }}.zip
-          release/
-        
-    - name: Create GitHub Release
-      if: startsWith(github.ref, 'refs/tags/')
-      uses: softprops/action-gh-release@v2
-      with:
-        files: |
-          BananacciVolume-v${{ github.ref_name }}.zip
-        body: |
-          # 🍌 Bananacci Volume v${{ github.ref_name }}
-          
-          ## What's New
-          - 10-step volume control with banana emoji feedback
-          - Smooth volume fading
-          - Auto-unmute functionality
-          - Transparent GUI display
-          
-          ## Installation
-          1. Download and extract the ZIP file
-          2. Run `BananacciVolume.ahk` with AutoHotkey v2
-          3. Use your volume keys to control volume with bananas!
-          
-          ## Requirements
-          - Windows 10/11
-          - AutoHotkey v2.0+
-          
-          Enjoy your bananas! 🍌
-        draft: false
-        prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check out
+        uses: actions/checkout@v4
+
+      # Compile .ahk → .exe with NO compression (helps AV heuristics)
+      - name: Compile with Ahk2Exe (no compression)
+        uses: benmusson/ahk2exe-action@v1
+        with:
+          in: ${{ env.SRC }}
+          out: ${{ env.OUT_DIR }}\\${{ env.APP_NAME }}.exe
+          target: x64
+          compression: none
+          # If you add an icon file to your repo (e.g., assets/icon.ico), uncomment:
+          # icon: assets/icon.ico
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: List build outputs
+        shell: pwsh
+        run: Get-ChildItem -Recurse $env:OUT_DIR | Format-Table -AutoSize
+
+      # Package a ZIP (ship the zip, not the raw exe)
+      - name: Package ZIP
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force $env:OUT_DIR | Out-Null
+          $zipPath = Join-Path $env:OUT_DIR "${{ env.APP_NAME }}-${{ github.ref_name }}.zip"
+          if (!(Test-Path $zipPath)) {
+            Compress-Archive -Path `
+              "$env:OUT_DIR\${{ env.APP_NAME }}.exe", `
+              "README.md","LICENSE" `
+              -DestinationPath $zipPath
+          }
+          Write-Host "ZIP at $zipPath"
+
+      # Upload artifacts for PRs & branch pushes (CI visibility)
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.APP_NAME }}-build
+          path: |
+            ${{ env.OUT_DIR }}/${{ env.APP_NAME }}.exe
+            ${{ env.OUT_DIR }}/${{ env.APP_NAME }}-${{ github.ref_name }}.zip
+
+      # Create a GitHub Release on tags, upload ONLY the ZIP
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          files: |
+            ${{ env.OUT_DIR }}/${{ env.APP_NAME }}-${{ github.ref_name }}.zip

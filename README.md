@@ -2,7 +2,7 @@
 
 **The most fun way to control your Windows volume!**
 
-Bananacci Volume transforms your boring volume controls into a delightful experience with smooth 10-step increments and visual banana emoji feedback.
+Bananacci Volume transforms your boring volume controls into a delightful experience with smooth 10-step increments and visual banana emoji feedback. **No AutoHotkey installation required!**
 
 ## ✨ Features
 
@@ -12,30 +12,33 @@ Bananacci Volume transforms your boring volume controls into a delightful experi
 - **🔊 Auto-Unmute**: Automatically unmutes when you increase from 0%
 - **⚡ Rapid Response**: Hold down volume keys for quick adjustments
 - **🎯 Transparent Display**: Clean, modern interface that doesn't interfere with your work
+- **🚀 Standalone Executable**: No AutoHotkey installation required!
 
 ## 🚀 Quick Start
 
-### For Non-Technical Users
+### For Everyone (Recommended)
 
-1. **Download AutoHotkey v2** (if you don't have it):
-   - Go to [https://www.autohotkey.com/](https://www.autohotkey.com/)
-   - Download and install AutoHotkey v2
+1. **Download the latest release**:
+   - Go to the [Releases](https://github.com/nicktobolski/bananacci/releases) page
+   - Download `BananacciVolume-vX.X.X.zip` (latest version)
+   - Extract the ZIP file
 
-2. **Download Bananacci Volume**:
-   - Click the green "Code" button above
-   - Select "Download ZIP"
-   - Extract the ZIP file to a folder
-
-3. **Run the script**:
-   - Double-click `BananacciVolume.ahk`
-   - You'll see a welcome message
+2. **Run the executable**:
+   - Double-click `BananacciVolume.exe`
+   - You'll see your current volume displayed as bananas
    - Use your volume keys to test it!
 
-### For Advanced Users
+### For Developers
 
-```autohotkey
-#Include BananacciVolume.ahk
-```
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/nicktobolski/bananacci.git
+   cd bananacci
+   ```
+
+2. **Run the source script** (requires AutoHotkey v2):
+   - Install AutoHotkey v2 from [autohotkey.com](https://www.autohotkey.com/)
+   - Double-click `BananacciVolume.ahk`
 
 ## 🎮 How to Use
 
@@ -61,30 +64,37 @@ Bananacci Volume transforms your boring volume controls into a delightful experi
 ## 🛠️ System Requirements
 
 - **Windows 10/11** (tested on Windows 10)
-- **AutoHotkey v2.0** or later
 - **Volume keys** on your keyboard
+- **No AutoHotkey installation required!** (for the executable)
 
 ## 🔧 Troubleshooting
 
-### Script won't run
-- Make sure AutoHotkey v2 is installed
+### Executable won't run
+- Make sure you're on Windows 10/11
 - Right-click the file and select "Run as administrator"
+- Check Windows Defender isn't blocking it
 
 ### Volume keys not working
 - Check if other software is using the volume keys
-- Try restarting the script
+- Try restarting the executable
+- Ensure the program is running (check system tray)
 
 ### Bananas not appearing
 - Ensure your keyboard has volume control keys
-- Check that the script is running (look for the AutoHotkey icon in system tray)
+- Check that the program is running
+- Try pressing volume keys to trigger the display
 
 ### Performance issues
-- Close other AutoHotkey scripts that might conflict
-- Restart the script if it becomes unresponsive
+- Close other volume control software that might conflict
+- Restart the executable if it becomes unresponsive
 
 ## 🎨 Customization
 
-Want to change the appearance? Edit `BananacciVolume.ahk`:
+Want to customize the appearance? You'll need to modify the source code and recompile:
+
+1. **Edit `BananacciVolume.ahk`** with your changes
+2. **Install AutoHotkey v2** for compilation
+3. **Use the compiler**: `Ahk2Exe.exe /in BananacciVolume.ahk /out BananacciVolume.exe`
 
 ### Change Banana Color
 ```autohotkey
@@ -109,6 +119,12 @@ Change `0.95` to `0.5` for center screen or `0.1` for top of screen.
 
 ## 📝 Version History
 
+### v1.1.0
+- **Standalone executable** - no AutoHotkey installation required!
+- Improved startup experience - shows current volume immediately
+- Better GitHub Actions workflow with automatic compilation
+- Enhanced installer script
+
 ### v1.0.0
 - Initial release
 - 10-step volume control
@@ -116,6 +132,30 @@ Change `0.95` to `0.5` for center screen or `0.1` for top of screen.
 - Banana emoji visual feedback
 - Auto-unmute functionality
 - Transparent GUI
+
+## 🚀 Development
+
+### Building from Source
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/nicktobolski/bananacci.git
+   cd bananacci
+   ```
+
+2. **Install AutoHotkey v2** for compilation
+
+3. **Compile to executable**:
+   ```bash
+   "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe" /in BananacciVolume.ahk /out BananacciVolume.exe
+   ```
+
+### Automated Builds
+
+The project uses GitHub Actions to automatically:
+- Compile the .ahk file to .exe
+- Create releases with proper versioning
+- Generate installers and ZIP packages
 
 ## 🤝 Contributing
 
