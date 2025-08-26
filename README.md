@@ -1,18 +1,18 @@
 # 🍌 Bananacci Volume
 
-**The most fun way to control your Windows volume!**
+**Enhanced Windows volume control with visual feedback**
 
-Bananacci Volume transforms your boring volume controls into a delightful experience with smooth 10-step increments and visual banana emoji feedback. **No AutoHotkey installation required!**
+Bananacci Volume provides an improved volume control experience with smooth 16-step increments and visual banana emoji feedback. No AutoHotkey installation required.
 
 ## ✨ Features
 
-- **🍌 Visual Feedback**: See your volume level with large yellow banana emojis
-- **🎛️ 10-Step Control**: Precise volume adjustments (0%, 1%, 3%, 5%, 8%, 13%, 21%, 34%, 55%, 100%)
+- **🍌 Visual Feedback**: See your volume level with up to 13 large yellow banana emojis
+- **🎛️ 16-Step Control**: Precise volume adjustments (0%, 1%, 2%, 3%, 5%, 8%, 13%, 21%, 34%, 50%, 65%, 75%, 82%, 88%, 94%, 100%)
 - **🎵 Smooth Fading**: Beautiful volume transitions instead of jarring jumps
 - **🔊 Auto-Unmute**: Automatically unmutes when you increase from 0%
 - **⚡ Rapid Response**: Hold down volume keys for quick adjustments
 - **🎯 Transparent Display**: Clean, modern interface that doesn't interfere with your work
-- **🚀 Standalone Executable**: No AutoHotkey installation required!
+- **🚀 Standalone Executable**: No AutoHotkey installation required
 
 ## 🚀 Quick Start
 
@@ -26,7 +26,7 @@ Bananacci Volume transforms your boring volume controls into a delightful experi
 2. **Run the executable**:
    - Double-click `BananacciVolume.exe`
    - You'll see your current volume displayed as bananas
-   - Use your volume keys to test it!
+   - Use your volume keys to test it
 
 ### For Developers
 
@@ -48,24 +48,28 @@ Bananacci Volume transforms your boring volume controls into a delightful experi
 
 ## 📊 Volume Levels
 
-| Bananas | Volume | Description |
-|---------|--------|-------------|
-| 🍌🍌🍌🍌🍌🍌🍌🍌🍌 | 100% | Maximum volume |
-| 🍌🍌🍌🍌🍌🍌🍌🍌  | 55% | High volume |
-| 🍌🍌🍌🍌🍌🍌🍌   | 34% | Medium-high |
-| 🍌🍌🍌🍌🍌🍌    | 21% | Medium |
-| 🍌🍌🍌🍌🍌     | 13% | Medium-low |
-| 🍌🍌🍌🍌      | 8% | Low |
-| 🍌🍌🍌       | 5% | Very low |
-| 🍌🍌        | 3% | Whisper |
-| 🍌         | 1% | Barely audible |
-|           | 0% | Muted |
+| Bananas | Volume Range | Description |
+|---------|-------------|-------------|
+| 🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌 | 92-100% | Maximum volume |
+| 🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌  | 83-91% | Very high |
+| 🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌   | 70-82% | High volume |
+| 🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌    | 57-69% | Medium-high |
+| 🍌🍌🍌🍌🍌🍌🍌🍌🍌     | 44-56% | Medium |
+| 🍌🍌🍌🍌🍌🍌🍌🍌      | 32-43% | Medium-low |
+| 🍌🍌🍌🍌🍌🍌🍌       | 21-31% | Low-medium |
+| 🍌🍌🍌🍌🍌🍌        | 13-20% | Low |
+| 🍌🍌🍌🍌🍌         | 8-12% | Very low |
+| 🍌🍌🍌🍌          | 5-7% | Quiet |
+| 🍌🍌🍌           | 3-4% | Very quiet |
+| 🍌🍌            | 1-2% | Whisper |
+| 🍌             | >0-1% | Barely audible |
+|               | 0% | Muted |
 
 ## 🛠️ System Requirements
 
 - **Windows 10/11** (tested on Windows 10)
 - **Volume keys** on your keyboard
-- **No AutoHotkey installation required!** (for the executable)
+- **No AutoHotkey installation required** (for the executable)
 
 ## 🔧 Troubleshooting
 
@@ -120,14 +124,14 @@ Change `0.95` to `0.5` for center screen or `0.1` for top of screen.
 ## 📝 Version History
 
 ### v1.1.0
-- **Standalone executable** - no AutoHotkey installation required!
+- **Standalone executable** - no AutoHotkey installation required
 - Improved startup experience - shows current volume immediately
 - Better GitHub Actions workflow with automatic compilation
 - Enhanced installer script
 
 ### v1.0.0
 - Initial release
-- 10-step volume control
+- 16-step volume control
 - Smooth volume fading
 - Banana emoji visual feedback
 - Auto-unmute functionality
@@ -159,7 +163,7 @@ The project uses GitHub Actions to automatically:
 
 ## 🤝 Contributing
 
-Found a bug or have an idea? We'd love to hear from you!
+Found a bug or have an idea? We'd love to hear from you.
 
 1. Open an issue on GitHub
 2. Describe the problem or feature request
@@ -167,7 +171,7 @@ Found a bug or have an idea? We'd love to hear from you!
 
 ## 📄 License
 
-This project is open source and available under the MIT License. Feel free to use, modify, and distribute!
+This project is open source and available under the MIT License. Feel free to use, modify, and distribute.
 
 ## 🙏 Acknowledgments
 
@@ -177,4 +181,4 @@ This project is open source and available under the MIT License. Feel free to us
 
 ---
 
-**Enjoy your bananas! 🍌**
+**Enjoy your bananas 🍌**

@@ -3,7 +3,7 @@
 ; ========================================
 ; BANANACCI VOLUME - VOLUME CONTROL PACKAGE
 ; ========================================
-; A user-friendly volume control package with 10-step increments and banana emoji feedback
+; A user-friendly volume control package with 16-step increments and banana emoji feedback
 ; For non-technical Windows users
 
 ; ========================================
@@ -18,13 +18,13 @@ global volumeTextControl := ""
 ; VOLUME CONTROL HOTKEYS
 ; ========================================
 
-; Volume Up (10-step curve)
+; Volume Up (16-step curve)
 Volume_Up::
 {
     ; Get current volume
     currentVolume := SoundGetVolume()
     
-    ; Calculate new volume using 10-step curve
+    ; Calculate new volume using 16-step curve
     newVolume := GetNextVolumeStep(currentVolume, true)
     
     ; Unmute if going from 0 to higher volume
@@ -40,13 +40,13 @@ Volume_Up::
     ShowVolumeIndicator(newVolume)
 }
 
-; Volume Down (10-step curve)
+; Volume Down (16-step curve)
 Volume_Down::
 {
     ; Get current volume
     currentVolume := SoundGetVolume()
     
-    ; Calculate new volume using 10-step curve
+    ; Calculate new volume using 16-step curve
     newVolume := GetNextVolumeStep(currentVolume, false)
     
     ; Fade to new volume smoothly
@@ -60,11 +60,11 @@ Volume_Down::
 ; VOLUME CONTROL FUNCTIONS
 ; ========================================
 
-; Function to calculate next volume level using 10-step curve
+; Function to calculate next volume level using 16-step curve
 GetNextVolumeStep(currentVolume, increase := true)
 {
-    ; Define 10 volume steps from 0 to 100
-    volumeSteps := [0, 1, 3, 5, 8, 13, 21, 34, 55, 100]
+    ; Define 16 volume steps from 0 to 100
+    volumeSteps := [0, 1, 2, 3, 5, 8, 13, 21, 34, 50, 65, 75, 82, 88, 94, 100]
     
     ; Find the closest step to current volume
     closestStep := 1
@@ -148,7 +148,7 @@ FadeStep()
 ShowVolumeIndicator(volume)
 {
     ; Find which step the current volume corresponds to
-    volumeSteps := [0, 1, 3, 5, 8, 13, 21, 34, 55, 100]
+    volumeSteps := [0, 1, 3, 5, 8, 13, 21, 32, 44, 57, 70, 83, 92, 100]
     currentStep := 0  ; Start at 0 for no bananas
     
     Loop volumeSteps.Length
@@ -160,8 +160,8 @@ ShowVolumeIndicator(volume)
         }
     }
     
-    ; Create a visual bar representation with 9 fixed banana positions
-    barLength := 9  ; 9 banana positions total
+    ; Create a visual bar representation with 15 fixed banana positions
+    barLength := 15  ; 15 banana positions total
     filledBars := currentStep
     emptyBars := barLength - filledBars
     
@@ -199,10 +199,10 @@ ShowVolumeGUI(visualBar, xPos, yPos)
                 
         ; Add only the banana text control with large font
         volumeTextControl := volumeGUI.Add("Text", "x5 y5 w900 h90 cFFFF00 Left", visualBar)  ; Large yellow bananas
-        volumeTextControl.SetFont("s48")  ; Set font size to 48 points
+        volumeTextControl.SetFont("s36")  ; Set font size to 48 points
         
-        ; Show GUI at calculated position (adjusted for text padding)
-        volumeGUI.Show("x" . (xPos - 500) . " y" . (yPos - 50) . " w910 h100 NoActivate")
+        ; Show GUI at calculated position (adjusted for text padding, moved 200px left)
+        volumeGUI.Show("x" . (xPos - 550) . " y" . (yPos - 50) . " w910 h100 NoActivate")
         
         ; Set transparency after showing the GUI
         WinSetTransColor("FF00FF", volumeGUI)
