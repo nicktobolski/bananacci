@@ -30,7 +30,7 @@ jobs:
           target: x64
           compression: none
           # If you add an icon file to your repo (e.g., assets/icon.ico), uncomment:
-          # icon: assets/icon.ico
+          icon: assets/icon.ico
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: List build outputs

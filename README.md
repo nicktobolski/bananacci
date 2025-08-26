@@ -2,7 +2,7 @@
 
 **Enhanced Windows volume control with visual feedback**
 
-Bananacci Volume provides an improved volume control experience with smooth 14-step increments and visual banana emoji feedback. No AutoHotkey installation required.
+Bananacci Volume provides an improved volume control experience with smooth 14-step increments and visual banana emoji feedback. 
 
 ## ✨ Features
 
@@ -69,7 +69,7 @@ Bananacci Volume provides an improved volume control experience with smooth 14-s
 
 - **Windows 10/11** (tested on Windows 10)
 - **Volume keys** on your keyboard
-- **No AutoHotkey installation required** (for the executable)
+
 
 ## 🔧 Troubleshooting
 
